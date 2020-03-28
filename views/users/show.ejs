@@ -1,0 +1,42 @@
+<%- include('../partials/header'); -%>
+<%- include('../partials/nav'); -%>
+<hr style="margin: 0;">
+<div style="background-color: rgba(8,69,70,0.11); margin-top: 0; padding-bottom: 30px; padding-top: 30px">
+    <div class="row container-fluid" style=" margin: 40px auto; display: flex; ">
+<!--        margin: 40px 40px 40px 25%;-->
+        <div class= "col-md-5" style=" vertical-align: middle;">
+                <img class="avatar-img rounded-circle" src="<%= user.avatar %>" alt="user profile image" >
+
+        </div>
+        <div class="col-md-7">
+            <div>
+                <div style="display: flex;">
+                    <h1><%= user.username %></h1>
+                    <% if(currentUser && user._id.equals(currentUser._id)){ %>
+                    <a style="margin: auto" href="/users/<%=user._id%>/edit" class ="btn btn-outline-secondary btn-sm ">Edit Profile</a>
+                    <% } %>
+                </div>
+
+
+                <div class="caption">Email: <a style="color: #5a5a5a" href="mailto:<%= user.email %>"><%= user.email %></a></div>
+                <p>Introduction: </p>
+                <p><%=user.bio%></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr style="margin-top: 0">
+<div class="row flex-wrap container-fluid" style="margin: 0 auto">
+    <% postedPhotos.forEach(function(postPhoto){ %>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="figure" style="margin: 20px 5px">
+                <img class="figure-img img-fluid rounded img-thumbnail" src="<%= postPhoto.image %>">
+                <div class="overlay"></div>
+                <div><a class="btn btn-secondary btn-sm img-text" role="button" href="/photoboards/<%= postPhoto._id %>" >View More</a></div>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<%- include('../partials/footer'); -%>

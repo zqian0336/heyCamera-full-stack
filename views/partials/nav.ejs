@@ -1,0 +1,71 @@
+<header>
+    <div>
+        <% if(error && error.length > 0) { %>
+            <div class="alert alert-danger text-center alert-dismissible fade show" role="alert" style="height: 45px">
+                <strong><%=error %></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+
+        <% if(success && success.length > 0) { %>
+            <div class="alert alert-success text-center alert-dismissible fade show" role="alert" style="height: 45px">
+                <strong><%= success %></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+
+    </div>
+
+
+    <nav class="navbar navbar-expand-md <%= typeof page != 'undefined' && page == 'show' ? 'navbar-dark bg-dark':'navbar-light bg-white'%>" style="margin-top: 0;" >
+        <div class = "container-fluid">
+            <div class = "navbar-header">
+                <a class = "navbar-brand the-icon" href="/photoboards">
+                    <img class="d-inline-block align-top" src="/icon/iconfinder_camera-shutter_351468.svg" width="30" height="30">
+                    HeyCamera
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+<!--                form-inline my-2 my-lg-0 mr-auto-->
+                <div style="width: 40%">
+                    <form class=" s-search" action="/photoboards" method="GET" >
+                        <div class="s-search-in" role="combobox">
+                            <input required name="search" class="s-search-input" type="search" placeholder="Search..." aria-label="Search" value autocomplete="off" spellcheck="true">
+                        </div>
+
+                        <button  class="btn btn-link btn-sm border-0 s-search-button" type="submit"><img src="/icon/search.svg" height="16" width="16" class="s-search-icon" ></button>
+                    </form>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right ml-auto" style="display: flex">
+                    <% if(!currentUser){ %>
+                        <li><a class="nav-item nav-link mr-3 <%= typeof page !== 'undefined' && page === 'signin' ? 'active' : '' %>" href="/signin">Sign in</a></li>
+                        <!--                        <li><a class="nav-item nav-link <%= typeof page !== 'undefined' && page === 'signup' ? 'active' : '' %>" href="/signup">Sign Up</a></li>-->
+                        <li><a href="/signup" class="btn btn-info <%= typeof page !== 'undefined' && page === 'signup' ? 'active' : '' %>" role="button" aria-pressed="true">Free Join</a></li>
+                    <% } else { %>
+                        <li class = "mr-3" style="margin: auto">Hello, <%= currentUser.username %></li>
+                        <li class = "mr-3 ha" style="margin: auto"><a href="/logout">Logout</a></li>
+                        <li>
+                            <a class = "navbar-brand" href="/users/<%=currentUser._id%>">
+                                <img class="rounded-circle zoom-avatar" src="<%=currentUser.avatar%>" width="30" height="30">
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+
+
+</header>
