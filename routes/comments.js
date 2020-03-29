@@ -21,7 +21,7 @@ router.get("/new", isLogged, function(req,res){
 });
 
 
-router.post("/", isLogged, function(req, res){
+router.post("/photoboards/:id", isLogged, function(req, res){
     Photo.findById(req.params.id, function(err, commentedPhoto){
         if(err){
             console.log(err);
@@ -49,8 +49,8 @@ router.post("/", isLogged, function(req, res){
 
 
 
-router.get("/:commentId/edit.ejs", isLogged, checkUserComment, function(req, res){
-    res.render("comments/edit.ejs", {photoId: req.params.id, comment: req.comment});
+router.get("/:commentId/edit", isLogged, checkUserComment, function(req, res){
+    res.render("comments/editComment", {photoId: req.params.id, comment: req.comment});
 });
 
 
@@ -58,7 +58,7 @@ router.put("/:commentId", function(req, res){
     Comment.findByIdAndUpdate(req.params.commentId ,req.body.comment, function(err){
         if(err){
             console.log(err);
-            res.render("comments/edit.ejs");
+            res.render("comments/editComment");
         }else{
             res.redirect("/photoboards/"+req.params.id); //这里的id是photo的
         }
