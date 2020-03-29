@@ -91,50 +91,6 @@ router.get("/", function(req, res){
 //create : add new photo
 
 router.post("/", isLogged, upload.single('image'), function (req, res) {
-/*
-    geocoder.geocode(req.body.photoboard.location, async function(err, data) {
-        if (err || data.length) {
-            req.flash('error', 'Invalid address');
-            return res.redirect('back');
-        }
-        // var lat = data.results[0].geometry.location.lat;
-        // var lng = data.results[0].geometry.location.lng;
-        // var location = data.results[0].formatted_address;
-        //console.log(req.file);
-        var lat = data[0].latitude;
-        var lng = data[0].longitude;
-        var location = data[0].formattedAddress;
-        await cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
-            if (err) {
-                req.flash('error', err.message);
-                return res.redirect('back');
-            }
-
-            // add cloudinary url for the image to the campground object under image property
-            req.body.photoboard.image = result.url;
-            // add image's public_id to campground object
-            req.body.photoboard.imageId = result.public_id;
-            // add author to campground
-            req.body.photoboard.author = {
-                id: req.user._id,
-                username: req.user.username
-            };
-            req.body.photoboard.location = location;
-            req.body.photoboard.lat= lat;
-            req.body.photoboard.lng = lng;
-            // var newPhoto = {name: name, image:image, imageId: imageId, description: desc, author: author, location: location, lat: lat, lng: lng};
-            Photo.create(req.body.photoboard, function (err, photoboard) {
-                if (err) {
-                    req.flash('error', err.message);
-                    return res.redirect('back');
-                }
-                console.log(photoboard);
-                res.redirect('/photoboards/' + photoboard.id);
-            });
-        });
-    });
-
- */
 
     cloudinary.v2.uploader.upload(req.file.path, function(err, result) {
         if(err) {
@@ -156,64 +112,10 @@ router.post("/", isLogged, upload.single('image'), function (req, res) {
                 req.flash('error', err.message);
                 return res.redirect('back');
             }
-            console.log(photoboard);
             res.redirect('/photoboards/' + photoboard.id);
         });
     });
 
-/*
-    // get data from form and add to campgrounds array
-    var name = req.body.name;
-    var desc = req.body.description;
-
-
-
-    geocoder.geocode(req.body.location, function(err, data) {
-        if( err || data.length){
-            req.flash('error', 'Invalid address');
-            return res.redirect('back');
-        }
-        // var lat = data.results[0].geometry.location.lat;
-        // var lng = data.results[0].geometry.location.lng;
-        // var location = data.results[0].formatted_address;
-        console.log(req.file);
-        var lat = data[0].latitude;
-        var lng = data[0].longitude;
-        var location = data[0].formattedAddress;
-
-        cloudinary.v2.uploader.upload(req.file.image.tempFilePath, function(err, result) {
-            if(err){
-                req.flash('error', err.message);
-                return res.redirect('back');
-            }
-            console.log("Result: ", result);
-
-
-            // add cloudinary url for the image to the campground object under image property
-            var image = result.url;
-
-            var imageId = result.public_id;
-            var author = {
-                id: req.user._id,
-                username: req.user.username
-            };
-            // add author to photoboard
-
-            var newPhoto = {name: name, image:image, imageId: imageId, description: desc, author: author, location: location, lat: lat, lng: lng};
-            console.log(newPhoto);
-            Photo.create(newPhoto, function(err, newlyCreated) {
-                if (err) {
-                    req.flash('error', err.message);
-                    return res.redirect('back');
-                }
-                console.log(newlyCreated);
-                res.redirect('/photoboards/'+newlyCreated.id);
-            });
-        });
-
-
-    });
-*/
 });
 
 //new : show form to create new photo
@@ -229,7 +131,6 @@ router.get("/:id" , function(req,res){
             req.flash('error', 'Sorry, the photo does not exist');
             return res.redirect("/photoboards");
         }
-        console.log(foundPhoto);
         res.render("photoboards/show", {foundPhoto: foundPhoto, page: 'show'}); //这个foundPhoto会在show.ejs 中用到
     });
 });

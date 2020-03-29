@@ -2,9 +2,9 @@
 <%- include('../partials/nav'); %>
 <hr style="margin-top: 0">
 <div>
-<div class="row container-fluid" style="margin: 20px auto; ">
-    <div class="col-md-9">
+<div class="row container" style="margin: 20px auto; ">
 
+    <div class = "col-md-9">
         <div class="showImg">
             <img class="figure-img img-fluid rounded" src="<%= foundPhoto.image %>">
             <div class="text-on-show-img">
@@ -14,7 +14,7 @@
 
         </div>
     </div>
-    <div class="col-md-3">
+    <div class = "col-md-3">
         <div class="caption-full">
             <div style="display: flex">
                 <a href="/users/<%=foundPhoto.author.id%>" style="margin-right: 20px;" >
@@ -75,8 +75,8 @@
         <% if(currentUser) {%>
         <div class="addComment" >
                 <div style="display: flex; width: 100%">
-                    <a href="/users/<%=foundPhoto.author.id%>" style="margin-right: 15px">
-                        <img class="rounded-circle zoom-avatar" src="<%=foundPhoto.author.avatar%>" width="40" height="40">
+                    <a href="/users/<%=currentUser._id%>" style="margin-right: 15px">
+                        <img class="rounded-circle zoom-avatar" src="<%=currentUser.avatar%>" width="40" height="40">
                     </a>
                     <form class=" s-search" action="/photoboards/<%=foundPhoto._id%>" method="POST" >
                         <div class="s-search-in" role="combobox">

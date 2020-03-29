@@ -73,25 +73,64 @@
 
             </div>
 
-            <div class="row flex-wrap container-fluid" style="margin: 0 auto">
+            <div class="row flex-wrap container-fluid" style="margin: 0 auto; display: flex">
 
-                <% allPhotos.forEach(function(pic){ %>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="figure" style="margin: 20px 5px">
-                            <img class="figure-img img-fluid rounded img-thumbnail" src="<%= pic.image %>">
-                            <div class="overlay"></div>
+                <%let s = Math.ceil(allPhotos.length/3)%>
+
+                <div class="photoColumn">
+                    <% for(let i = 0; i < s; i++){ %>
+
+                        <div class="figure" style="margin: 20px 40px">
+                            <img class="figure-img img-fluid rounded img-thumbnail" src="<%= allPhotos[i].image %>">
+                            <!--                            <div class="overlay"></div>-->
                             <div class="avatar-on-figure">
-                                <a href="/users/<%=pic.author.id%>">
-                                    <img class="rounded-circle zoom-avatar" src="<%=pic.author.avatar%>" width="30" height="30">
+                                <a href="/users/<%=allPhotos[i].author.id%>">
+                                    <img class="rounded-circle zoom-avatar" src="<%=allPhotos[i].author.avatar%>" width="30" height="30">
                                 </a>
-                                <p class="textShadow" style="color: white; margin-left: 10px"><%=pic.author.username%><p>
+                                <p class="textShadow" style="color: white; margin-left: 10px"><%=allPhotos[i].author.username%><p>
                             </div>
-                            <div><a class="btn btn-light btn-sm img-text" role="button" href="/photoboards/<%= pic._id %>" >View More</a></div>
+                            <div><a class="btn btn-light btn-sm img-text" role="button" href="/photoboards/<%= allPhotos[i]._id %>" >View More</a></div>
                         </div>
-                    </div>
-                <% }); %>
+                    <%}%>
+                </div>
+                <div class="photoColumn">
+
+                    <% for(let i = s; i < 2*s ; i++){ %>
+
+                        <div class="figure" style="margin: 20px 40px">
+                            <img class="figure-img img-fluid rounded img-thumbnail" src="<%= allPhotos[i].image %>">
+                            <!--                            <div class="overlay"></div>-->
+                            <div class="avatar-on-figure">
+                                <a href="/users/<%=allPhotos[i].author.id%>">
+                                    <img class="rounded-circle zoom-avatar" src="<%=allPhotos[i].author.avatar%>" width="30" height="30">
+                                </a>
+                                <p class="textShadow" style="color: white; margin-left: 10px"><%=allPhotos[i].author.username%><p>
+                            </div>
+                            <div><a class="btn btn-light btn-sm img-text" role="button" href="/photoboards/<%= allPhotos[i]._id %>" >View More</a></div>
+                        </div>
+                    <%}%>
+                </div>
+                <div class="photoColumn">
+                    <% for(let i = 2*s; i < allPhotos.length ; i++){ %>
+
+
+                        <div class="figure" style="margin: 20px 40px">
+                            <img class="figure-img img-fluid rounded img-thumbnail" src="<%= allPhotos[i].image %>">
+
+                            <!--                            <div class="overlay"></div>-->
+                            <div class="avatar-on-figure">
+                                <a href="/users/<%=allPhotos[i].author.id%>">
+                                    <img class="rounded-circle zoom-avatar" src="<%=allPhotos[i].author.avatar%>" width="30" height="30">
+                                </a>
+                                <p class="textShadow" style="color: white; margin-left: 10px"><%=allPhotos[i].author.username%><p>
+                            </div>
+                            <div><a class="btn btn-light btn-sm img-text" role="button" href="/photoboards/<%= allPhotos[i]._id %>" >View More</a></div>
+                        </div>
+                    <%}%>
+                </div>
             </div>
         </main>
+
 
 
 <%- include('../partials/footer'); -%>

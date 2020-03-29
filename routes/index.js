@@ -86,30 +86,6 @@ router.post('/signin',
         successFlash: 'Welcome'
     }), function(req, res){
 });
-// router.post('/signin',
-//     passport.authenticate('local', { failureRedirect: '/signin' }),
-//     function(req, res) {
-//         res.redirect('/photoboards');
-//     });
-// router.post('/signin', function (req, res, next) {
-//     passport.authenticate('local',  function (err, user, info) {
-//         if(err){
-//             return next(err);
-//         }
-//         if(!user){
-//             return res.redirect("/signin");
-//         }
-//         req.logIn(user, function(err){
-//             if(err){
-//                 return next(err);
-//             }
-//             return res.redirect("/photoboards");
-//         });
-//
-//     })(req, res,next);
-//
-// });
-
 
 
 router.get("/logout", function(req, res){
