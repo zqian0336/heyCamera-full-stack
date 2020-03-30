@@ -32,8 +32,8 @@ const routeOfComments = require("./routes/comments");
 
 //mongoose promise library
 mongoose.Promise = global.Promise;
-
-const dbUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/local';
+const dbUri = 'mongodb://zqian0115:Qian2012@ds029426.mlab.com:29426/heycamera';
+// const dbUri = 'mongodb://localhost:27017/local';
 
 mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
    .then(() => console.log('DataBase has been connected'))
