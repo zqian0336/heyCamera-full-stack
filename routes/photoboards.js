@@ -41,8 +41,10 @@ var upload = multer({ storage: storage, fileFilter: imageFilter});
 
 cloudinary.config({
     cloud_name: 'heycameracloud',
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+    // api_key: process.env.CLOUDINARY_API_KEY,
+    // api_secret: process.env.CLOUDINARY_API_SECRET
+    api_key: "376791236774896",
+    api_secret: "9FMfW8bOifudt50zYXxcDsVE_EQ"
 });
 
 
