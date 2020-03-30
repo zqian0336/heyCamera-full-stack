@@ -1,4 +1,3 @@
-
 {
   "name": "heycamera",
   "version": "1.0.0",
@@ -9,8 +8,8 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
-    "ejs": "^3.0.1",
-    "express": "latest",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
     "express-session": "latest",
     "flash": "^1.1.0",
@@ -31,7 +30,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

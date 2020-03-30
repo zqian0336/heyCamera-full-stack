@@ -82,7 +82,7 @@ router.post('/signin',
     passport.authenticate('local', {
         successRedirect: '/photoboards',
         failureRedirect: '/signin',
-        failureFlash: true,
+        failureFlash: 'Username or Password is not correct',
         successFlash: 'Welcome'
     }), function(req, res){
 });
@@ -101,13 +101,13 @@ router.get("/users/:id", function(req, res) {
             req.flash("error", "Something went wrong.");
             return res.redirect("/photoboards");
         }
-        Photo.find().where('author.id').equals(foundUser._id).exec(function(err, postedPhoto) {
+        Photo.find().where('author.id').equals(foundUser._id).exec( function(err, postedPhoto) {
             if(err) {
                 req.flash("error", "Something went wrong.");
                 return res.redirect("/photoboards");
             }
             res.render("users/show", {user: foundUser, postedPhotos: postedPhoto});
-        })
+        });
     });
 });
 
@@ -147,6 +147,19 @@ router.put("/users/:id", upload.single('avatar'), function(req, res){
             editedUser.email = req.body.email;
             editedUser.bio = req.body.bio;
             editedUser.save();
+            Photo.find().where('author.id').equals(editedUser._id).exec( function(err, postedPhoto) {
+                if(err) {
+                    req.flash("error", "Something went wrong.");
+                    return res.redirect("/photoboards");
+                }
+                postedPhoto.forEach(function (pic) {
+                    pic.author.avatar = editedUser.avatar;
+                    pic.author.username = editedUser.username;
+                    pic.save();
+
+                });
+            });
+
             req.flash("success","Successfully Updated!");
             res.redirect("/users/" + editedUser._id);
 
