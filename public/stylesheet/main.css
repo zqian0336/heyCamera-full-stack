@@ -2,6 +2,7 @@ html {
     position: relative;
     min-height: 100%;
 
+
 }
 
 body {
@@ -15,6 +16,22 @@ body {
     font-family: 'Sen', sans-serif;
 
 }
+
+#the-log > li{
+    margin-top: 7px;
+    margin-bottom: 7px;
+
+}
+
+
+/*.photoColumn {*/
+/*    position: relative;*/
+
+/*    width: 100%;*/
+/*}*/
+
+
+
 
 .changeColor{
     color: white;
@@ -395,6 +412,3 @@ body {
 }
 
 /*==========index=======*/
-.photoColumn{
-    width: 33.333%;
-}

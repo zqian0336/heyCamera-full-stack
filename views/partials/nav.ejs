@@ -9,11 +9,14 @@
                     <img class="d-inline-block align-top" src="/icon/iconfinder_camera-shutter_351468.svg" width="30" height="30">
                     HeyCamera
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+
+
 
             </div>
+            <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" ></span>
+            </button>
+
 
             <div id="navbarCollapse" class="collapse navbar-collapse">
 <!--                form-inline my-2 my-lg-0 mr-auto-->
@@ -30,16 +33,16 @@
 
 
                 <ul id="the-log" class="nav navbar-nav navbar-right ml-auto" style="display: flex">
-                    <li class="mr-5" style="margin: auto">
+                    <li class="mr-2">
                         <a id="addP" class="btn btn-outline-dark btn-md" href="/photoboards/new">Add New Photo</a>
                     </li>
                     <% if(!currentUser){ %>
-                        <li><a class="nav-item nav-link mr-3 <%= typeof page !== 'undefined' && page === 'signin' ? 'active' : '' %>" href="/signin">Sign in</a></li>
+                        <li><a class="nav-link mr-1 <%= typeof page !== 'undefined' && page === 'signin' ? 'active' : '' %>" href="/signin">Sign in</a></li>
                         <!--                        <li><a class="nav-item nav-link <%= typeof page !== 'undefined' && page === 'signup' ? 'active' : '' %>" href="/signup">Sign Up</a></li>-->
                         <li><a href="/signup" class="btn btn-info <%= typeof page !== 'undefined' && page === 'signup' ? 'active' : '' %>" role="button" aria-pressed="true">Free Join</a></li>
                     <% } else { %>
-                        <li class = "mr-3" style="margin: auto">Hello, <%= currentUser.username %></li>
-                        <li class = "mr-3 ha" style="margin: auto"><a href="/logout">Logout</a></li>
+                        <li class = "mr-1" style="margin: auto">Hello, <%= currentUser.username %></li>
+                        <li class = "mr-2 ha" style="margin: auto"><a href="/logout">Logout</a></li>
                         <li>
                             <a class = "navbar-brand" href="/users/<%=currentUser._id%>">
                                 <img class="rounded-circle zoom-avatar" src="<%=currentUser.avatar%>" width="30" height="30">
