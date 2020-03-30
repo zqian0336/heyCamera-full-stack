@@ -15,14 +15,14 @@
                     <input type="file" id="avatar" name="avatar" class ="form-control">
                 </div>
                 <div class="form-group">
-                    <input value="<%=editedUser.username%>" class="form-control" type="text" name="username" placeholder= "Username" >
+                    <input value="<%=editedUser.username%>" class="form-control" type="text" name="username" placeholder= "Username" required>
                 </div>
                 <div class="form-group">
                     <input value="<%=editedUser.email%>" class="form-control" type="email" name="email" placeholder= "Email" >
                 </div>
                 <div class="form-group" style="margin-top: 30px;">
 
-                    <textarea placeholder="Introduce yourself" class="form-control" style="width: 100%" name="bio" id="bio" cols="40" rows="5"><%=editedUser.bio%></textarea>
+                    <textarea placeholder="Introduce yourself" class="form-control" style="width: 100%" name="bio" id="bio" cols="40" rows="5" ><%=editedUser.bio%></textarea>
                 </div>
 
                 <div class="form-group" style="margin-top: 40px;">

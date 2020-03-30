@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Photo = require("../models/photo");
+const User = require("../models/user");
 const Comment = require("../models/comment");
 const middleware = require("../middleware");
 //const NodeGeocoder = require('node-geocoder');
@@ -116,6 +117,7 @@ router.post("/", isLogged, upload.single('image'), function (req, res) {
                 req.flash('error', err.message);
                 return res.redirect('back');
             }
+            req.user.isOld = true;
             res.redirect('/photoboards/' + photoboard.id);
         });
     });
