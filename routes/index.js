@@ -147,20 +147,20 @@ router.put("/users/:id", upload.single('avatar'), function(req, res){
             editedUser.email = req.body.email;
             editedUser.bio = req.body.bio;
             editedUser.save();
-            if(editedUser.isOld){
-                Photo.find().where('author.id').equals(editedUser._id).exec( function(err, postedPhoto) {
-                    if(err) {
-                        req.flash("error", "Something went wrong.");
-                        return res.redirect("/photoboards");
-                    }
-                    postedPhoto.forEach(function (pic) {
-                        pic.author.avatar = editedUser.avatar;
-                        pic.author.username = editedUser.username;
-                        pic.save();
-
-                    });
-                });
-            }
+            // if(editedUser.isOld){
+            //     Photo.find().where('author.id').equals(editedUser._id).exec( function(err, postedPhoto) {
+            //         if(err) {
+            //             req.flash("error", "Something went wrong.");
+            //             return res.redirect("/photoboards");
+            //         }
+            //         postedPhoto.forEach(function (pic) {
+            //             pic.author.avatar = editedUser.avatar;
+            //             pic.author.username = editedUser.username;
+            //             pic.save();
+            //
+            //         });
+            //     });
+            // }
 
             req.flash("success","Successfully Updated!");
             res.redirect("/users/" + editedUser._id);
