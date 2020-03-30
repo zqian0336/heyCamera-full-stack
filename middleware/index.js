@@ -12,10 +12,10 @@ module.exports = {
         Photo.findById(req.params.id, function(err, foundPhoto){
             if(err || !foundPhoto){
                 console.log(err);
-                req.flash('error', 'Sorry, that campground does not exist!');
+                req.flash('error', 'Sorry, that Photo does not exist!');
                 res.redirect('/photoboards');
             } else if(foundPhoto.author.id.equals(req.user._id)){
-                req.photoId = foundPhoto;
+                req.photoboard = foundPhoto;
                 next();
             } else {
                 req.flash('error', 'You don\'t have permission to do that!');
@@ -39,4 +39,6 @@ module.exports = {
         });
     }
 
-}
+
+
+};

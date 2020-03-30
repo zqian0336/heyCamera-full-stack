@@ -8,20 +8,20 @@ var {isLogged, checkUserComment} = middleware;
 
 
 
-router.get("/new", isLogged, function(req,res){
-    console.log(req.params.id);
-    Photo.findById(req.params.id, function(err, commentedPhoto){
-        if(err){
-            console.log(err);
-        }else{
-            res.render("comments/new", {commentedPhoto:commentedPhoto});
-        }
+// router.get("/new", isLogged, function(req,res){
+//     console.log(req.params.id);
+//     Photo.findById(req.params.id, function(err, commentedPhoto){
+//         if(err){
+//             console.log(err);
+//         }else{
+//             res.render("comments/new", {commentedPhoto:commentedPhoto});
+//         }
+//
+//     });
+// });
 
-    });
-});
 
-
-router.post("/photoboards/:id", isLogged, function(req, res){
+router.post("/", isLogged, function(req, res){
     Photo.findById(req.params.id, function(err, commentedPhoto){
         if(err){
             console.log(err);
@@ -37,7 +37,7 @@ router.post("/photoboards/:id", isLogged, function(req, res){
                     comment.save();
                     commentedPhoto.comments.push(comment);
                     commentedPhoto.save();
-                    console.log(comment);
+
                     req.flash('success', 'Created a comment');
                     res.redirect("/photoboards/"+commentedPhoto._id);
                 }

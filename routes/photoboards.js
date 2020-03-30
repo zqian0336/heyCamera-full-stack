@@ -31,6 +31,7 @@ var storage = multer.diskStorage({
 var imageFilter = function (req, file, cb) {
     // accept image files only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        req.flash('error','Only image files are allowed!(jpg/jpeg/png/gif)');
         return cb(new Error('Only image files are allowed!'), false);
     }
     cb(null, true);
@@ -49,7 +50,7 @@ cloudinary.config({
 
 
 
-var {isLogged, checkUserCampground, checkUserComment} = middleware;
+let {isLogged, checkUserPhoto, checkUserComment} = middleware;
 
 
 // Define escapeRegex function for search feature
@@ -119,7 +120,7 @@ router.post("/", isLogged, upload.single('image'), function (req, res) {
 });
 
 //new : show form to create new photo
-router.get("/new", function(req, res){
+router.get("/new",isLogged, function(req, res){
     res.render("photoboards/new");
 });
 
@@ -151,7 +152,7 @@ router.get("/:id/edit", isLogged, function(req, res){
 });
 
 // PUT - updates campground in the database
-router.put("/:id", upload.single('image'), isLogged, function(req, res){
+router.put("/:id", upload.single('image'), function(req, res){
     Photo.findById(req.params.id, async function(err, editedPhoto){
         if(err){
             req.flash("error", err.message);
@@ -190,7 +191,7 @@ router.put("/:id", upload.single('image'), isLogged, function(req, res){
 
 });
 
-router.delete("/:id", isLogged, function(req, res) {
+router.delete("/:id", isLogged, checkUserPhoto, function(req, res) {
     Photo.findById(req.params.id, async function (err, foundPhoto) {
         if(err){
             req.flash("error", err.message);

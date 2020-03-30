@@ -45,7 +45,7 @@
                                 <h1 class="textShadow">Explore the world</h1>
                                 <p class="textShadow">Delta gets you there. We’re ready to fly.</p>
                                 <div style="margin: 20px auto">
-                                    <form class=" s-search" action="/photoboards" method="GET" >
+                                    <form class=" s-search real-search" action="/photoboards" method="GET" >
                                         <button  class="btn btn-link btn-sm border-0 s-search-button" type="submit"><img src="/icon/search.svg" height="16" width="16" class="s-search-icon" ></button>
                                         <div class="s-search-in" role="combobox">
                                             <input required name="search" class="s-search-input" type="search" placeholder="Start exploring... " aria-label="Search" value autocomplete="off" spellcheck="true">
@@ -73,11 +73,11 @@
 
             </div>
 
-            <div class="row flex-wrap container-fluid" style="margin: 0 auto; display: flex">
+            <div class="row flex-wrap container-fluid search-show" style="margin: 0 auto; display: flex">
 
                 <%let s = Math.ceil(allPhotos.length/3)%>
 
-                <div class="photoColumn">
+                <div class="photoColumn search-show1">
                     <% for(let i = 0; i < s; i++){ %>
 
                         <div class="figure" style="margin: 20px 40px">
@@ -93,7 +93,7 @@
                         </div>
                     <%}%>
                 </div>
-                <div class="photoColumn">
+                <div class="photoColumn search-show2">
 
                     <% for(let i = s; i < 2*s ; i++){ %>
 
@@ -110,7 +110,7 @@
                         </div>
                     <%}%>
                 </div>
-                <div class="photoColumn">
+                <div class="photoColumn search-show3">
                     <% for(let i = 2*s; i < allPhotos.length ; i++){ %>
 
 

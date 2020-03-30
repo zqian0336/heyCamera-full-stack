@@ -1,22 +1,6 @@
 <header>
-    <div>
-        <% if(error && error.length > 0) { %>
-            <div class="alert alert-danger text-center alert-dismissible fade show" role="alert" style="height: 45px">
-                <strong><%=error %></strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <% } %>
 
-        <% if(success && success.length > 0) { %>
-            <div class="alert alert-success text-center alert-dismissible fade show" role="alert" style="height: 45px">
-                <strong><%= success %></strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <% } %>
+
 
     <nav class="navbar navbar-expand-md <%= typeof page != 'undefined' && page == 'show' ? 'navbar-light bg-white':'navbar-light bg-white'%>" style="margin-top: 0;" >
         <div class = "container-fluid">
@@ -34,7 +18,7 @@
             <div id="navbarCollapse" class="collapse navbar-collapse">
 <!--                form-inline my-2 my-lg-0 mr-auto-->
                 <div style="width: 40%">
-                    <form class=" s-search" action="/photoboards" method="GET" >
+                    <form class=" s-search real-search" action="/photoboards" method="GET" >
                         <div class="s-search-in" role="combobox">
                             <input required name="search" class="s-search-input" type="search" placeholder="Search..." aria-label="Search" value autocomplete="off" spellcheck="true">
                         </div>

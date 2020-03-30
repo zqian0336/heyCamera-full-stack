@@ -27,16 +27,54 @@
     </div>
 </div>
 <hr style="margin-top: 0">
-<div class="row flex-wrap container-fluid" style="margin: 0 auto">
-    <% postedPhotos.forEach(function(postPhoto){ %>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="figure" style="margin: 20px 5px">
-                <img class="figure-img img-fluid rounded img-thumbnail" src="<%= postPhoto.image %>">
-                <div class="overlay"></div>
-                <div><a class="btn btn-secondary btn-sm img-text" role="button" href="/photoboards/<%= postPhoto._id %>" >View More</a></div>
+<div class="row flex-wrap container-fluid" style="margin: 0 auto; display: flex">
+
+    <%let s = Math.ceil(postedPhotos.length/3)%>
+
+    <div class="photoColumn">
+        <% for(let i = 0; i < s; i++){ %>
+
+            <div class="figure" style="margin: 20px 40px">
+                <img class="figure-img img-fluid rounded img-thumbnail" src="<%= postedPhotos[i].image %>">
+
+                <div><a class="btn btn-light btn-sm img-text" role="button" href="/photoboards/<%= postedPhotos[i]._id %>" >View More</a></div>
             </div>
-        </div>
-    <% }); %>
+        <%}%>
+    </div>
+    <div class="photoColumn">
+
+        <% for(let i = s; i < 2*s ; i++){ %>
+
+            <div class="figure" style="margin: 20px 40px">
+                <img class="figure-img img-fluid rounded img-thumbnail" src="<%= postedPhotos[i].image %>">
+
+                <div><a class="btn btn-light btn-sm img-text" role="button" href="/photoboards/<%= postedPhotos[i]._id %>" >View More</a></div>
+            </div>
+        <%}%>
+    </div>
+    <div class="photoColumn">
+        <% for(let i = 2*s; i < postedPhotos.length ; i++){ %>
+
+
+            <div class="figure" style="margin: 20px 40px">
+                <img class="figure-img img-fluid rounded img-thumbnail" src="<%= postedPhotos[i].image %>">
+
+
+                <div><a class="btn btn-light btn-sm img-text" role="button" href="/photoboards/<%= postedPhotos[i]._id %>" >View More</a></div>
+            </div>
+        <%}%>
+    </div>
 </div>
+<!--<div class="row flex-wrap container-fluid" style="margin: 0 auto">-->
+<!--    < postedPhotos.forEach(function(postPhoto){ >-->
+<!--        <div class="col-lg-4 col-md-6 col-sm-12">-->
+<!--            <div class="figure" style="margin: 20px 5px">-->
+<!--                <img class="figure-img img-fluid rounded img-thumbnail" src="<= postPhoto.image >">-->
+<!--                <div class="overlay"></div>-->
+<!--                <div><a class="btn btn-secondary btn-sm img-text" role="button" href="/photoboards/<= postPhoto._id >" >View More</a></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    < }); >-->
+<!--</div>-->
 
 <%- include('../partials/footer'); -%>

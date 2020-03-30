@@ -6,9 +6,22 @@ html {
 
 body {
 
-    padding-bottom: 3rem;
+    /*padding-bottom: 3rem;*/
     color: #5a5a5a;
-    margin-bottom: 60px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /*margin-bottom: 60px;*/
+    font-family: 'Sen', sans-serif;
+
+}
+
+#zoomImg {
+    background-color: #5a5a5a;
+}
+
+#zoomImg > img{
+    height: 100%;
 }
 
 .clear{
@@ -17,11 +30,14 @@ body {
 
 .footer {
     position: absolute;
+
+
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 60px;
     background-color: #f5f5f5;
+
 }
 
 .container .text-muted {
@@ -169,7 +185,7 @@ body {
 .text-on-show-img {
     position: absolute;
     top: 80px;
-    left: 130px;
+    left: 30%;
     transform: scaleY(0);
     font-size: 32px;
 }
@@ -179,15 +195,20 @@ body {
 
 }
 
-.showImg > img {
 
-}
 
 .showImg:hover .text-on-show-img {
 
     transform: translate(-50%, -50%);
 
 }
+
+
+
+
+
+
+
 
 
 /* RESPONSIVE CSS
@@ -342,12 +363,26 @@ body {
     display: flex;
     border-radius: 24px;
     background-color: #eee;
-    font-size: 12px;
+    font-size: 14px;
     border: 1px solid transparent;
     position: relative;
+
 }
 
+.showComment  {
+    padding: 6px 12px;
 
+}
+
+.showComment > p{
+    margin: 0;
+
+}
+
+.showComment > .btn {
+    font-size: 0.4rem;
+    padding: .15rem .2rem;
+}
 
 /*==========index=======*/
 .photoColumn{
