@@ -1,5 +1,5 @@
 {
-  "name": "HeyCamera",
+  "name": "heycamera",
   "version": "1.0.0",
   "dependencies": {
     "bcrypt": "^4.0.0",
@@ -24,5 +24,21 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "path": "^0.12.7"
-  }
+  },
+  "description": "Modified the old version",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zqian0336/heyCamera-full-stack.git"
+  },
+  "author": "Zhicheng Qian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zqian0336/heyCamera-full-stack/issues"
+  },
+  "homepage": "https://github.com/zqian0336/heyCamera-full-stack#readme"
 }
