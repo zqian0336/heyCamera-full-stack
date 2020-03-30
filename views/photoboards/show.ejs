@@ -5,12 +5,13 @@
 <div class="row container" style="margin: 20px auto; display: flex" id="beforeZoom">
 
     <div class = "col-md-9">
-        <div class="showImg">
+        <div class="showImg" onclick="zoom()" >
             <img id="the-img" class="figure-img img-fluid rounded " src="<%= foundPhoto.image %>">
             <div class="text-on-show-img">
 
                 <p class="textShadow" style="color: white; margin-left: 10px"><%=foundPhoto.name%><p>
             </div>
+
 
         </div>
 
@@ -36,7 +37,7 @@
                 <% if(currentUser && foundPhoto.author.id.equals(currentUser._id)){ %>
                     <a  class="btn btn-sm btn-outline-secondary mr-2" href="/photoboards/<%= foundPhoto._id %>/edit">Edit</a>
                     <form action="/photoboards/<%= foundPhoto._id %>?_method=DELETE" method="POST" class="delete-form">
-                        <button class="btn btn-sm btn-outline-secondary">Delete</button>
+                        <button onclick="return confirm('Are you sure you want to delete this photo?');" class="btn btn-sm btn-outline-secondary">Delete</button>
                     </form>
                 <% } %>
             </div>
@@ -70,7 +71,7 @@
                                     <a href="/photoboards/<%=foundPhoto._id%>/comments/<%=comment._id%>/edit" class="btn btn-light ml-4" style="font-size: 0.4rem;
     padding: .15rem .2rem;">EDIT</a>
                                     <form class="delete-form " action="/photoboards/<%=foundPhoto._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST" >
-                                        <button class="btn btn-light ml-1" style="font-size: 0.4rem;
+                                        <button onclick="return confirm('Are you sure you want to delete this comment?');" class="btn btn-light ml-1" style="font-size: 0.4rem;
     padding: .15rem .2rem;">DELETE</button>
                                     </form>
                                     <% } %>
@@ -118,13 +119,9 @@
 </div>
 
 <!--    ============zoom-->
-<div style="display: none;" id="zoomImg" >
-    <div class="showImg">
-        <img class="figure-img img-fluid rounded " src="<%= foundPhoto.image %>">
-        <div class="text-on-show-img">
-
-            <p class="textShadow" style="color: white; margin-left: 10px"><%=foundPhoto.name%><p>
-        </div>
+<div style="display: none;" id="zoomImg" class="container">
+    <div onclick="zoomOut()" style="text-align: center">
+        <img class="figure-img img-fluid rounded" id="the-photo" src="<%= foundPhoto.image %>">
     </div>
 
 </div>

@@ -192,22 +192,24 @@ router.put("/:id", upload.single('image'), function(req, res){
 });
 
 router.delete("/:id", isLogged, checkUserPhoto, function(req, res) {
-    Photo.findById(req.params.id, async function (err, foundPhoto) {
-        if(err){
-            req.flash("error", err.message);
-            return res.redirect("back");
-        }
-        try{
-            await cloudinary.v2.uploader.destroy(foundPhoto.imageId);
-            foundPhoto.remove();
-            req.flash("success", "Photo deleted !");
-            res.redirect("/photoboards");
-        } catch(err){
-            if(err){
+
+        Photo.findById(req.params.id, async function (err, foundPhoto) {
+            if (err) {
                 req.flash("error", err.message);
                 return res.redirect("back");
             }
-        }
-    })
+            try {
+                await cloudinary.v2.uploader.destroy(foundPhoto.imageId);
+                foundPhoto.remove();
+                req.flash("success", "Photo deleted !");
+                res.redirect("/photoboards");
+            } catch (err) {
+                if (err) {
+                    req.flash("error", err.message);
+                    return res.redirect("back");
+                }
+            }
+        })
+
 });
 module.exports = router;

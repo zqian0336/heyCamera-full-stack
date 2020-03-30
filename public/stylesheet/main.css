@@ -16,13 +16,23 @@ body {
 
 }
 
-#zoomImg {
-    background-color: #5a5a5a;
+.changeColor{
+    color: white;
 }
 
-#zoomImg > img{
-    height: 100%;
+
+
+#zoomImg {
+
+    background-color: #1d2129;
+    cursor: zoom-out;
+
+
 }
+
+
+
+
 
 .clear{
     clear: both;
@@ -30,8 +40,7 @@ body {
 
 .footer {
     position: absolute;
-
-
+    display: flex;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
@@ -192,6 +201,7 @@ body {
 
 .showImg{
     position: relative;
+    cursor: zoom-in;
 
 }
 

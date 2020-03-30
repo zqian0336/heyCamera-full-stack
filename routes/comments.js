@@ -67,25 +67,29 @@ router.put("/:commentId", function(req, res){
 });
 
 
-router.delete("/:commentId", isLogged, checkUserComment, function(req, res){
+    router.delete("/:commentId", isLogged, checkUserComment, function (req, res) {
 
-    Photo.findByIdAndUpdate(req.params.id, {$pull : {comments: req.comment.id}}, function(err){
-        if(err){
-            console.log(err);
-            req.flash("error", err.message);
-            res.redirect("/photoboards");
-        }else{
-            req.comment.remove(function(err){
-                if(err){
-                    req.flash("error", err.message);
-                    return res.redirect("/photoboards/"+req.params.id);
-                }
-                req.flash("error", "Comment deleted");
-                res.redirect("/photoboards/"+req.params.id);
-            });
-        }
+        Photo.findByIdAndUpdate(req.params.id, {$pull: {comments: req.comment.id}}, function (err) {
+            if (err) {
+                console.log(err);
+                req.flash("error", err.message);
+                res.redirect("/photoboards");
+            } else {
+
+                req.comment.remove(function (err) {
+                    if (err) {
+                        req.flash("error", err.message);
+                        return res.redirect("/photoboards/" + req.params.id);
+                    }
+                    req.flash("error", "Comment deleted");
+                    res.redirect("/photoboards/" + req.params.id);
+                });
+
+            }
+        });
+
     });
-});
+
 
 
 module.exports = router;
