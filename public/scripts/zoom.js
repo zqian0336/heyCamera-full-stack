@@ -21,7 +21,7 @@ function zoom() {
     document.getElementById("the-footer").style.backgroundColor = "#1d2129";
     // document.getElementById("the-footer").style.marginTop = "0";
     // document.getElementsByTagName("html").style.backgroundColor = "black";
-    document.getElementById("the-photo").style.height ="700px";
+    document.getElementById("the-photo").style.maxHeight ="700px";
 
 
 
