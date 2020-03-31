@@ -104,7 +104,7 @@ router.post("/", isLogged, upload.single('image'), function (req, res) {
         }
 
 
-        req.body.photoboard.image = result.secure_url;
+        req.body.photoboard.image = result.url;
         req.body.photoboard.imageId = result.public_id;
         req.body.photoboard.author = {
             id: req.user._id,
@@ -176,7 +176,7 @@ router.put("/:id", upload.single('image'), function(req, res){
                         await cloudinary.uploader.destroy(editedPhoto.imageId); //await
                         var result = await cloudinary.uploader.upload(req.file.path); //await
                         editedPhoto.imageId = result.public_id;
-                        editedPhoto.image = result.secure_url;
+                        editedPhoto.image = result.url;
                     } catch (err) {
                         req.flash("error", err.message);
                         return res.redirect("back");
