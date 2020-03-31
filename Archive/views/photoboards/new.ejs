@@ -1,0 +1,37 @@
+<%- include('../partials/header'); -%>
+
+        <div class="container">
+            <div class="row">
+
+                <div style="width: 40%; margin: 25px auto;" class = "text-center">
+                    <img src="/icon/iconfinder_global__international__location__worldwide__2568863.svg" alt="" width="100" height="100"/>
+                    <h1 style="text-align: center; margin-bottom: 40px;margin-top: 40px;" >Create a New Photo</h1>
+                    <form action="/photoboards" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="photoboard[name]" placeholder="Photo Name">
+                        </div>
+<!--                        <div class="form-group">-->
+
+<!--                            <input class="form-control" type="text" name="photoboard[location]" id="location" placeholder="Location (ie. Los Angeles, CA)">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <input class="form-control" type="text" name="image" placeholder="Select image url">-->
+<!--                        </div>-->
+                        <div class="form-group" style="margin-top: 30px;">
+
+                            <textarea placeholder="Describe the photo, show your experience !" class = "form-control" style="width: 100%" name="photoboard[description]" id="description" cols="40" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input class = "form-control" type="file" id="image" name="image" accept="image/*" required>
+                        </div>
+                        <div class="form-group" style="margin-top: 40px;">
+                            <button class="btn btn-lg btn-secondary btn-block form-control" >Submit!</button>
+                        </div>
+                    </form>
+                    <a href="/photoboards">Go Back</a>
+                </div>
+            </div>
+        </div>
+<%- include('../partials/footer'); -%>

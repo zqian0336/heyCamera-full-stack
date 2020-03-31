@@ -1,0 +1,45 @@
+{
+  "name": "heycamera",
+  "version": "1.0.0",
+  "dependencies": {
+    "bcrypt": "^4.0.0",
+    "body-parser": "latest",
+    "cloudinary": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "express-session": "latest",
+    "flash": "^1.1.0",
+    "geocode": "0.0.3",
+    "geocoder": "^0.2.3",
+    "method-override": "latest",
+    "moment": "^2.24.0",
+    "mongoose": "latest",
+    "multer": "^1.4.2",
+    "node-geocoder": "^3.25.0",
+    "passport": "latest",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
+    "path": "^0.12.7"
+  },
+  "description": "Modified the old version",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zqian0336/heyCamera-full-stack.git"
+  },
+  "author": "Zhicheng Qian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zqian0336/heyCamera-full-stack/issues"
+  },
+  "homepage": "https://github.com/zqian0336/heyCamera-full-stack#readme"
+}

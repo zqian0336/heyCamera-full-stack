@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HeyCamera</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheet/main.css">
+        <link rel="stylesheet" href="/stylesheet/signin.css">
+        <link rel="stylesheet" href="/stylesheet/loader.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Sen&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="/scripts/zoom.js" ></script>
+
+    </head>
+    <body onload=<%= typeof page != 'undefined' && page == 'show' ?"myFunction()":"" %> style="margin:0;">
+    <%if(typeof page != 'undefined' && page == 'show') {%>
+        <div id="loader"></div>
+    <% }%>
+    <div style="<%= typeof page != 'undefined' && page == 'show'?'display:none':'display:block' %>" id="myDiv" class="animate-bottom">
+        <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger text-center alert-dismissible fade show" role="alert" style="height: 48px;">
+            <strong><%=error %></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <% } %>
+
+        <% if(success && success.length > 0) { %>
+            <div class="alert alert-success text-center alert-dismissible fade show" role="alert" style="height: 45px">
+                <strong><%= success %></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+
+
