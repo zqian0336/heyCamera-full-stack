@@ -82,7 +82,7 @@ router.post('/signin',
     passport.authenticate('local', {
         successRedirect: '/photoboards',
         failureRedirect: '/signin',
-        failureFlash: alert("message"),
+        failureFlash: 'Invalid username or password',
         successFlash: 'Welcome'
     }), function(req, res){
 });
