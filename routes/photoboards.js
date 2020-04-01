@@ -41,7 +41,7 @@ var imageFilter = function (req, file, cb) {
 var upload = multer({storage: storage, fileFilter: imageFilter});
 
 
-cloudinary.config({
+cloudinary.v2.config({
     cloud_name: process.env.CLOUD_NAME,
 
     // api_key:'242425789528719',
@@ -91,7 +91,7 @@ router.get("/", function (req, res) {
 //create : add new photo
 
 router.post("/", isLogged, upload.single('image'), async function (req, res) {
-    await cloudinary.config({
+    await cloudinary.v2.config({
         cloud_name: process.env.CLOUD_NAME,
 
         // api_key:'242425789528719',
@@ -223,6 +223,12 @@ router.delete("/:id", isLogged, checkUserPhoto, function (req, res) {
             return res.redirect("back");
         }
         try {
+            await cloudinary.config({
+                cloud_name: process.env.CLOUD_NAME,
+                api_key: process.env.CLOUDINARY_API_KEY,
+                api_secret: process.env.CLOUDINARY_API_SECRET
+            });
+
             await cloudinary.v2.uploader.destroy(foundPhoto.imageId);
             foundPhoto.remove();
             req.flash("success", "Photo deleted !");
