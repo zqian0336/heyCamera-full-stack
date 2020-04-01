@@ -7,15 +7,15 @@ const middleware = require("../middleware");
 // var geocoder = require('geocoder');
 const multer = require("multer");
 var cloudinary = require('cloudinary');
-var NodeGeocoder = require('node-geocoder');
+// var NodeGeocoder = require('node-geocoder');
 
-var options = {
-    provider: 'google',
-    httpAdapter: 'https',
-    apiKey: process.env.GEOCODER_API_KEY,
-    formatter: null
-};
-var geocoder = NodeGeocoder(options);
+// var options = {
+//     provider: 'google',
+//     httpAdapter: 'https',
+//     apiKey: process.env.GEOCODER_API_KEY,
+//     formatter: null
+// };
+// var geocoder = NodeGeocoder(options);
 
 // const storage = multer.diskStorage({
 //     destination: 'public/uploads',
@@ -42,10 +42,10 @@ var upload = multer({storage: storage, fileFilter: imageFilter});
 
 
 cloudinary.config({
-    cloud_name: 'heycameracloud',
+    cloud_name: 'hs4nr6o3o',
 
-    api_key:'376791236774896',
-    api_secret:'9FMfW8bOifudt50zYXxcDsVE_EQ'
+    api_key:'242425789528719',
+    api_secret:'QXKf2dlz74zNGB-4YCF4NjePE-A'
     // api_key: process.env.CLOUDINARY_API_KEY,
     // api_secret: process.env.CLOUDINARY_API_SECRET
 });
@@ -106,23 +106,24 @@ router.post("/", isLogged, upload.single('image'), function (req, res) {
             username: req.user.username,
             avatar: req.user.avatar
         };
-        geocoder.geocode(req.body.photoboard.location, async function (err, data) {
-            if (err || data.status === 'ZERO_RESULTS') {
-                req.flash('error', 'Invalid address');
+        Photo.create(req.body.photoboard, function (err, photoboard) {
+            if (err) {
+                req.flash('error', err.message);
                 return res.redirect('back');
             }
-            req.body.photoboard.lat = data[0].latitude;
-            req.body.photoboard.lng = data[0].longitude;
-            req.body.photoboard.location = data[0].formattedAddress;
-            Photo.create(req.body.photoboard, function (err, photoboard) {
-                if (err) {
-                    req.flash('error', err.message);
-                    return res.redirect('back');
-                }
 
-                res.redirect('/photoboards/' + photoboard.id);
-            });
+            res.redirect('/photoboards/' + photoboard.id);
         });
+        // geocoder.geocode(req.body.photoboard.location, async function (err, data) {
+        //     if (err || data.status === 'ZERO_RESULTS') {
+        //         req.flash('error', 'Invalid address');
+        //         return res.redirect('back');
+        //     }
+        //     req.body.photoboard.lat = data[0].latitude;
+        //     req.body.photoboard.lng = data[0].longitude;
+        //     req.body.photoboard.location = data[0].formattedAddress;
+        //
+        // });
         // var newPhoto = {name: name, image:image, imageId: imageId, description: desc, author: author, location: location, lat: lat, lng: lng};
 
     });
