@@ -90,9 +90,9 @@ router.get("/", function (req, res) {
 
 //create : add new photo
 
-router.post("/", isLogged, upload.single('image'), function (req, res) {
+router.post("/", isLogged, upload.single('image'), async function (req, res) {
 
-    cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
+    await cloudinary.v2.uploader.upload(req.file.path,  function (err, result) {
         if (err) {
             req.flash('error', err.message);
             return res.redirect('back');

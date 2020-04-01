@@ -23,7 +23,7 @@ var upload = multer({storage: storage, fileFilter: imageFilter});
 
 
 cloudinary.config({
-    cloud_name: 'heycameracloud',
+    cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
@@ -148,7 +148,7 @@ router.put("/users/:id", upload.single('avatar'), function (req, res) {
             if (req.file) {
                 try {
                     //await cloudinary.uploader.destroy(editedUser.avatarId); //await
-                    var result = await cloudinary.uploader.upload(req.file.path); //await
+                    var result = await cloudinary.uploader.upload(req.file.path);
                     editedUser.avatarId = result.public_id;
                     editedUser.avatar = result.url;
                 } catch (err) {
