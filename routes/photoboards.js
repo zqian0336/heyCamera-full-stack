@@ -57,7 +57,7 @@ let {isLogged, checkUserPhoto, checkUserComment} = middleware;
 // Define escapeRegex function for search feature
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
+}
 
 
 //index page: show all photos
@@ -90,9 +90,9 @@ router.get("/", function (req, res) {
 
 //create : add new photo
 
-router.post("/", isLogged, upload.single('image'), async function (req, res) {
+router.post("/", isLogged, upload.single('image'), function (req, res) {
 
-    await cloudinary.v2.uploader.upload(req.file.path,  function (err, result) {
+    cloudinary.v2.uploader.upload(req.file.path,  function (err, result) {
         if (err) {
             req.flash('error', err.message);
             return res.redirect('back');
