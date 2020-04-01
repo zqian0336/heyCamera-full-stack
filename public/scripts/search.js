@@ -7,14 +7,14 @@ $('.real-search').on('input', function () {
         let s = Math.ceil(searched.length / 3);
         $('.search-show').html('');
         $('.search-show').append(`
-            <div class="photoColumn search-show1"></div>
-            <div class="photoColumn search-show2"></div>
-            <div class="photoColumn search-show3"></div>
+            <div class="col-md-4 search-show1"></div>
+            <div class="col-md-4 search-show2"></div>
+            <div class="col-md-4 search-show3"></div>
             `);
 
         for (let i = 0; i < s; i++) {
             $('.search-show1').append(`
-                <div class="figure" style="margin: 20px 40px">
+                <div class="figure" style="margin: 20px 10px">
                     <img class="figure-img img-fluid rounded img-thumbnail" src="${searched[i].image}">
                     
                     <div class="avatar-on-figure">
@@ -28,7 +28,7 @@ $('.real-search').on('input', function () {
         }
         for (let i = s; i < 2 * s; i++) {
             $('.search-show2').append(`
-                <div class="figure" style="margin: 20px 40px">
+                <div class="figure" style="margin: 20px 10px">
                     <img class="figure-img img-fluid rounded img-thumbnail" src="${searched[i].image}">
                     
                     <div class="avatar-on-figure">
@@ -43,7 +43,7 @@ $('.real-search').on('input', function () {
         }
         for (let i = 2 * s; i < searched.length; i++) {
             $('.search-show3').append(`
-                <div class="figure" style="margin: 20px 40px">
+                <div class="figure" style="margin: 20px 10px">
                     <img class="figure-img img-fluid rounded img-thumbnail" src="${searched[i].image}">
                     
                     <div class="avatar-on-figure">
