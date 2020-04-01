@@ -147,6 +147,12 @@ router.put("/users/:id", upload.single('avatar'), function (req, res) {
         } else {
             if (req.file) {
                 try {
+                    await cloudinary.config({
+                        cloud_name: process.env.CLOUD_NAME,
+                        api_key: process.env.CLOUDINARY_API_KEY,
+                        api_secret: process.env.CLOUDINARY_API_SECRET
+                    });
+
                     //await cloudinary.uploader.destroy(editedUser.avatarId); //await
                     var result = await cloudinary.uploader.upload(req.file.path);
                     editedUser.avatarId = result.public_id;

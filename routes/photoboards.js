@@ -90,9 +90,17 @@ router.get("/", function (req, res) {
 
 //create : add new photo
 
-router.post("/", isLogged, upload.single('image'), function (req, res) {
+router.post("/", isLogged, upload.single('image'), async function (req, res) {
+    await cloudinary.config({
+        cloud_name: process.env.CLOUD_NAME,
 
-    cloudinary.v2.uploader.upload(req.file.path,  function (err, result) {
+        // api_key:'242425789528719',
+        // api_secret:'QXKf2dlz74zNGB-4YCF4NjePE-A'
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
+    });
+
+    await cloudinary.v2.uploader.upload(req.file.path,  function (err, result) {
         if (err) {
             req.flash('error', err.message);
             return res.redirect('back');
@@ -179,6 +187,11 @@ router.put("/:id", upload.single('image'), function (req, res) {
 
             if (req.file) {
                 try {
+                    await cloudinary.config({
+                        cloud_name: process.env.CLOUD_NAME,
+                        api_key: process.env.CLOUDINARY_API_KEY,
+                        api_secret: process.env.CLOUDINARY_API_SECRET
+                    });
                     await cloudinary.uploader.destroy(editedPhoto.imageId); //await
                     var result = await cloudinary.uploader.upload(req.file.path); //await
                     editedPhoto.imageId = result.public_id;
