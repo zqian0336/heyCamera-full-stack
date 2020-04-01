@@ -43,9 +43,6 @@ var upload = multer({storage: storage, fileFilter: imageFilter});
 
 cloudinary.v2.config({
     cloud_name: process.env.CLOUD_NAME,
-
-    // api_key:'242425789528719',
-    // api_secret:'QXKf2dlz74zNGB-4YCF4NjePE-A'
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
@@ -180,11 +177,7 @@ router.put("/:id", upload.single('image'), function (req, res) {
 
             if (req.file) {
                 try {
-                    await cloudinary.config({
-                        cloud_name: process.env.CLOUD_NAME,
-                        api_key: process.env.CLOUDINARY_API_KEY,
-                        api_secret: process.env.CLOUDINARY_API_SECRET
-                    });
+
                     await cloudinary.uploader.destroy(editedPhoto.imageId); //await
                     var result = await cloudinary.uploader.upload(req.file.path); //await
                     editedPhoto.imageId = result.public_id;
@@ -216,11 +209,6 @@ router.delete("/:id", isLogged, checkUserPhoto, function (req, res) {
             return res.redirect("back");
         }
         try {
-            await cloudinary.config({
-                cloud_name: process.env.CLOUD_NAME,
-                api_key: process.env.CLOUDINARY_API_KEY,
-                api_secret: process.env.CLOUDINARY_API_SECRET
-            });
 
             await cloudinary.v2.uploader.destroy(foundPhoto.imageId);
             foundPhoto.remove();
