@@ -18,8 +18,6 @@ const methodOverride = require("method-override");
 // var seedDB      = require("./seeds")
 
 
-
-
 require('dotenv').config();
 
 //requiring routes
@@ -28,21 +26,18 @@ const routeOfIndex = require("./routes/index");
 const routeOfComments = require("./routes/comments");
 
 
-
-
 //mongoose promise library
 mongoose.Promise = global.Promise;
 const dbUri = 'mongodb://zqian0115:Qian2012@ds029426.mlab.com:29426/heycamera';
 // const dbUri = 'mongodb://localhost:27017/local';
 
 mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
-   .then(() => console.log('DataBase has been connected'))
-   .catch(err => console.log('database connection failed'));
+    .then(() => console.log('DataBase has been connected'))
+    .catch(err => console.log('database connection failed'));
 
 
 // EJS
 app.set("view engine", "ejs");
-
 
 
 // Express body parser
@@ -67,12 +62,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
-
 app.locals.moment = require("moment");
 // seedDB();
-
-
 
 
 passport.use(new LocalStrategy(User.authenticate()));
@@ -103,8 +94,8 @@ passport.deserializeUser(User.deserializeUser());
 // });
 
 
-app.use(function(req,res,next){
-    res.locals.currentUser=req.user; //这一步是为了让全部网页都适用于“login之后就自动登陆这项法则”
+app.use(function (req, res, next) {
+    res.locals.currentUser = req.user; //这一步是为了让全部网页都适用于“login之后就自动登陆这项法则”
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();       //work as middleware,
@@ -113,13 +104,11 @@ app.use(function(req,res,next){
 //===============
 
 
-
-
 app.use("/", routeOfIndex); //如何前往下一步, landing
 app.use("/photoboards", routeOfPhotoboards);
 app.use("/photoboards/:id/comments", routeOfComments);
 
 
-app.listen(process.env.PORT || 3000  , process.env.IP, function(){
+app.listen(process.env.PORT || 3000, process.env.IP, function () {
     console.log("HeyCamera Server Started!");
 });

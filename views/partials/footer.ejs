@@ -8,7 +8,9 @@
 
 
         <script>
-            $(".alert").fadeOut(6000);
+            <% if(typeof page != 'undefined' && page !== 'signin'){ %>
+                $(".alert").fadeOut(8000);
+                <%}%>
 
         </script>
         <script>

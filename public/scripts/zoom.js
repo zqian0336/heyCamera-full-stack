@@ -1,4 +1,3 @@
-
 function zoom() {
     var myD = document.getElementById("myDiv");
     var theNav = document.getElementById("the-nav");
@@ -21,9 +20,7 @@ function zoom() {
     document.getElementById("the-footer").style.backgroundColor = "#1d2129";
     // document.getElementById("the-footer").style.marginTop = "0";
     // document.getElementsByTagName("html").style.backgroundColor = "black";
-    document.getElementById("the-photo").style.maxHeight ="700px";
-
-
+    document.getElementById("the-photo").style.maxHeight = "700px";
 
 
 }

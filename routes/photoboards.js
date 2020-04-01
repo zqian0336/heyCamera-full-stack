@@ -4,17 +4,19 @@ const Photo = require("../models/photo");
 const User = require("../models/user");
 const Comment = require("../models/comment");
 const middleware = require("../middleware");
-//const NodeGeocoder = require('node-geocoder');
+// var geocoder = require('geocoder');
 const multer = require("multer");
 var cloudinary = require('cloudinary');
+var NodeGeocoder = require('node-geocoder');
 
-// var options = {
-//     provider: 'google',
-//     httpAdapter: 'https',
-//     apiKey: process.env.GEOCODER_API_KEY,
-//     formatter: null
-// };
-// var geocoder = NodeGeocoder(options);
+var options = {
+    provider: 'google',
+    httpAdapter: 'https',
+    apiKey: process.env.GEOCODER_API_KEY,
+    formatter: null
+};
+var geocoder = NodeGeocoder(options);
+
 // const storage = multer.diskStorage({
 //     destination: 'public/uploads',
 //     filename: function (req, file, cb) {
@@ -23,21 +25,20 @@ var cloudinary = require('cloudinary');
 // });
 
 
-
 var storage = multer.diskStorage({
-    filename: function(req, file, callback) {
+    filename: function (req, file, callback) {
         callback(null, Date.now() + file.originalname);
     }
 });
 var imageFilter = function (req, file, cb) {
     // accept image files only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-        req.flash('error','Only image files are allowed!(jpg/jpeg/png/gif)');
+        req.flash('error', 'Only image files are allowed!(jpg/jpeg/png/gif)');
         return cb(new Error('Only image files are allowed!'), false);
     }
     cb(null, true);
 };
-var upload = multer({ storage: storage, fileFilter: imageFilter});
+var upload = multer({storage: storage, fileFilter: imageFilter});
 
 
 cloudinary.config({
@@ -50,10 +51,6 @@ cloudinary.config({
 });
 
 
-
-
-
-
 let {isLogged, checkUserPhoto, checkUserComment} = middleware;
 
 
@@ -63,11 +60,9 @@ function escapeRegex(text) {
 };
 
 
-
-
 //index page: show all photos
-router.get("/", function(req, res){
-    if(req.query.search && req.xhr) {
+router.get("/", function (req, res) {
+    if (req.query.search && req.xhr) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all campgrounds from DB
         Photo.find({name: regex}, function (err, allPhotos) {
@@ -82,9 +77,9 @@ router.get("/", function(req, res){
             if (err) {
                 console.log(err);
             } else {
-                if(req.xhr) {
+                if (req.xhr) {
                     res.json(allPhotos);
-                }else {
+                } else {
                     res.render("photoboards/index", {allPhotos: allPhotos, page: 'photoboards'});
                     // photoboards-> allPhoto, 在index中allPhotos 是一个set，包含了所有的照片对象
                 }
@@ -97,8 +92,8 @@ router.get("/", function(req, res){
 
 router.post("/", isLogged, upload.single('image'), function (req, res) {
 
-    cloudinary.v2.uploader.upload(req.file.path, function(err, result) {
-        if(err) {
+    cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
+        if (err) {
             req.flash('error', err.message);
             return res.redirect('back');
         }
@@ -111,28 +106,38 @@ router.post("/", isLogged, upload.single('image'), function (req, res) {
             username: req.user.username,
             avatar: req.user.avatar
         };
-        // var newPhoto = {name: name, image:image, imageId: imageId, description: desc, author: author, location: location, lat: lat, lng: lng};
-        Photo.create(req.body.photoboard, function(err, photoboard) {
-            if (err) {
-                req.flash('error', err.message);
+        geocoder.geocode(req.body.photoboard.location, async function (err, data) {
+            if (err || data.status === 'ZERO_RESULTS') {
+                req.flash('error', 'Invalid address');
                 return res.redirect('back');
             }
+            req.body.photoboard.lat = data[0].latitude;
+            req.body.photoboard.lng = data[0].longitude;
+            req.body.photoboard.location = data[0].formattedAddress;
+            Photo.create(req.body.photoboard, function (err, photoboard) {
+                if (err) {
+                    req.flash('error', err.message);
+                    return res.redirect('back');
+                }
 
-            res.redirect('/photoboards/' + photoboard.id);
+                res.redirect('/photoboards/' + photoboard.id);
+            });
         });
+        // var newPhoto = {name: name, image:image, imageId: imageId, description: desc, author: author, location: location, lat: lat, lng: lng};
+
     });
 
 });
 
 //new : show form to create new photo
-router.get("/new",isLogged, function(req, res){
+router.get("/new", isLogged, function (req, res) {
     res.render("photoboards/new");
 });
 
 //show : show more info about photo
-router.get("/:id" , function(req,res){
-    Photo.findById(req.params.id).populate("comments").exec(function(err, foundPhoto){
-        if(err || !foundPhoto){
+router.get("/:id", function (req, res) {
+    Photo.findById(req.params.id).populate("comments").exec(function (err, foundPhoto) {
+        if (err || !foundPhoto) {
             console.log(err);
             req.flash('error', 'Sorry, the photo does not exist');
             return res.redirect("/photoboards");
@@ -143,11 +148,11 @@ router.get("/:id" , function(req,res){
 
 
 // EDIT - shows edit.ejs form for a campground
-router.get("/:id/edit", isLogged, function(req, res){
+router.get("/:id/edit", isLogged, function (req, res) {
     Photo.findById(req.params.id, function (err, foundPhoto) {
-        if(err){
+        if (err) {
             console.log(err);
-        }else{
+        } else {
             //render edit.ejs template with that campground
             res.render("photoboards/editPhoto", {editedPhoto: foundPhoto});
         }
@@ -157,12 +162,12 @@ router.get("/:id/edit", isLogged, function(req, res){
 });
 
 // PUT - updates campground in the database
-router.put("/:id", upload.single('image'), function(req, res){
-    Photo.findById(req.params.id, async function(err, editedPhoto){
-        if(err){
+router.put("/:id", upload.single('image'), function (req, res) {
+    Photo.findById(req.params.id, async function (err, editedPhoto) {
+        if (err) {
             req.flash("error", err.message);
             res.redirect('back');
-        } else{
+        } else {
             // geocoder.geocode(req.body.location, async function (err, data) {
             //     // editedPhoto.lat = data.results[0].geometry.location.lat;
             //     // editedPhoto.lng = data.results[0].geometry.location.lng;
@@ -171,23 +176,23 @@ router.put("/:id", upload.single('image'), function(req, res){
             //     editedPhoto.lng = data[0].longitude;
             //     editedPhoto.location = data[0].formattedAddress;
 
-                if(req.file){
-                    try {
-                        await cloudinary.uploader.destroy(editedPhoto.imageId); //await
-                        var result = await cloudinary.uploader.upload(req.file.path); //await
-                        editedPhoto.imageId = result.public_id;
-                        editedPhoto.image = result.url;
-                    } catch (err) {
-                        req.flash("error", err.message);
-                        return res.redirect("back");
-                    }
-
+            if (req.file) {
+                try {
+                    await cloudinary.uploader.destroy(editedPhoto.imageId); //await
+                    var result = await cloudinary.uploader.upload(req.file.path); //await
+                    editedPhoto.imageId = result.public_id;
+                    editedPhoto.image = result.url;
+                } catch (err) {
+                    req.flash("error", err.message);
+                    return res.redirect("back");
                 }
-                editedPhoto.name = req.body.name;
-                editedPhoto.description = req.body.description;
-                editedPhoto.save();
-                req.flash("success","Successfully Updated!");
-                res.redirect("/photoboards/" + editedPhoto._id);
+
+            }
+            editedPhoto.name = req.body.name;
+            editedPhoto.description = req.body.description;
+            editedPhoto.save();
+            req.flash("success", "Successfully Updated!");
+            res.redirect("/photoboards/" + editedPhoto._id);
 
 
             // });
@@ -196,25 +201,25 @@ router.put("/:id", upload.single('image'), function(req, res){
 
 });
 
-router.delete("/:id", isLogged, checkUserPhoto, function(req, res) {
+router.delete("/:id", isLogged, checkUserPhoto, function (req, res) {
 
-        Photo.findById(req.params.id, async function (err, foundPhoto) {
+    Photo.findById(req.params.id, async function (err, foundPhoto) {
+        if (err) {
+            req.flash("error", err.message);
+            return res.redirect("back");
+        }
+        try {
+            await cloudinary.v2.uploader.destroy(foundPhoto.imageId);
+            foundPhoto.remove();
+            req.flash("success", "Photo deleted !");
+            res.redirect("/photoboards");
+        } catch (err) {
             if (err) {
                 req.flash("error", err.message);
                 return res.redirect("back");
             }
-            try {
-                await cloudinary.v2.uploader.destroy(foundPhoto.imageId);
-                foundPhoto.remove();
-                req.flash("success", "Photo deleted !");
-                res.redirect("/photoboards");
-            } catch (err) {
-                if (err) {
-                    req.flash("error", err.message);
-                    return res.redirect("back");
-                }
-            }
-        })
+        }
+    })
 
 });
 module.exports = router;

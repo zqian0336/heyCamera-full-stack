@@ -9,15 +9,15 @@ var photoSchema = new mongoose.Schema({
     // lat: Number,
     // lng: Number,
     createdAt: {type: Date, default: Date.now},
-    author : {
+    author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref : "User"
+            ref: "User"
         },
         username: String,
         avatar: String
     },
-    comments:[
+    comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Comment"

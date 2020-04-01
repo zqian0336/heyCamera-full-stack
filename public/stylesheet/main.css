@@ -17,7 +17,7 @@ body {
 
 }
 
-#the-log > li{
+#the-log > li {
     margin-top: 7px;
     margin-bottom: 7px;
 
@@ -31,12 +31,9 @@ body {
 /*}*/
 
 
-
-
-.changeColor{
+.changeColor {
     color: white;
 }
-
 
 
 #zoomImg {
@@ -48,10 +45,7 @@ body {
 }
 
 
-
-
-
-.clear{
+.clear {
     clear: both;
 }
 
@@ -69,8 +63,6 @@ body {
 .container .text-muted {
     margin: 20px 0;
 }
-
-
 
 
 /* Thumbnail styles */
@@ -94,7 +86,7 @@ body {
 
 /* Flexbox grid fix */
 .flex-wrap {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
 }
 
@@ -105,18 +97,18 @@ body {
 /*}*/
 
 
-
-
 /* Carousel base class */
 .carousel {
     margin-bottom: 4rem;
 }
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
     bottom: 3rem;
     z-index: 10;
 
 }
+
 .textShadow {
     text-shadow: 2px 2px 8px black;
 
@@ -126,6 +118,7 @@ body {
 .carousel-item {
     height: 28rem;
 }
+
 /*一定要放上，不然会崩溃*/
 .carousel-item > img {
     position: absolute;
@@ -186,7 +179,6 @@ body {
     transform: translate(-50%, -50%);
 
 
-
 }
 
 .avatar-on-figure {
@@ -198,11 +190,11 @@ body {
 }
 
 
-.figure:hover .avatar-on-figure{
+.figure:hover .avatar-on-figure {
     transform: translate(-50%, -50%);
 }
 
-.figure:hover .avatar-on-figure:hover > img{
+.figure:hover .avatar-on-figure:hover > img {
     transform: scale(1.2);
 }
 
@@ -216,12 +208,11 @@ body {
     font-size: 32px;
 }
 
-.showImg{
+.showImg {
     position: relative;
     cursor: zoom-in;
 
 }
-
 
 
 .showImg:hover .text-on-show-img {
@@ -229,13 +220,6 @@ body {
     transform: translate(-50%, -50%);
 
 }
-
-
-
-
-
-
-
 
 
 /* RESPONSIVE CSS
@@ -280,8 +264,6 @@ body {
 }
 
 
-
-
 /*======User Profile=======*/
 .avatar-img {
     /*vertical-align: middle;*/
@@ -289,7 +271,7 @@ body {
     position: relative;
     height: 150px;
     width: 150px;
-    background-color: rgba(0,0,0,.1);
+    background-color: rgba(0, 0, 0, .1);
 
     margin-right: 0;
     float: right;
@@ -305,7 +287,7 @@ body {
 /*==========nav========*/
 
 /*====search===*/
-.s-search{
+.s-search {
     height: 40px;
     display: flex;
     border-radius: 24px;
@@ -331,7 +313,7 @@ body {
     box-shadow: none;
 }
 
-.s-search-input:focus{
+.s-search-input:focus {
     outline: none;
 }
 
@@ -355,7 +337,7 @@ body {
     transition: fill .1s ease-in-out;
 }
 
-.s-search-button:hover > .s-search-icon{
+.s-search-button:hover > .s-search-icon {
     transform: scale(1.2);
 }
 
@@ -374,7 +356,6 @@ body {
 .the-icon:hover > img {
     transform: scale(1.2);
 }
-
 
 
 /*======showTable=====*/
@@ -396,12 +377,12 @@ body {
 
 }
 
-.showComment  {
+.showComment {
     padding: 6px 12px;
 
 }
 
-.showComment > p{
+.showComment > p {
     margin: 0;
 
 }

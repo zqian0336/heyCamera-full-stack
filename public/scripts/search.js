@@ -1,4 +1,4 @@
-$('.real-search').on('input', function() {
+$('.real-search').on('input', function () {
     var search = $(this).serialize();
     if (search === "all") {
         search = "all"
@@ -6,7 +6,7 @@ $('.real-search').on('input', function() {
     $.get('/photoboards?' + search, function (searched) {
         let s = Math.ceil(searched.length / 3);
         $('.search-show').html('');
-            $('.search-show').append(`
+        $('.search-show').append(`
             <div class="photoColumn search-show1"></div>
             <div class="photoColumn search-show2"></div>
             <div class="photoColumn search-show3"></div>
@@ -59,7 +59,6 @@ $('.real-search').on('input', function() {
 });
 
 
-
-$('.real-search').submit(function(event) {
+$('.real-search').submit(function (event) {
     event.preventDefault();
 });
