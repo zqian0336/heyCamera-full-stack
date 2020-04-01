@@ -42,12 +42,12 @@ var upload = multer({storage: storage, fileFilter: imageFilter});
 
 
 cloudinary.config({
-    cloud_name: 'hs4nr6o3o',
+    cloud_name: process.env.CLOUD_NAME,
 
-    api_key:'242425789528719',
-    api_secret:'QXKf2dlz74zNGB-4YCF4NjePE-A'
-    // api_key: process.env.CLOUDINARY_API_KEY,
-    // api_secret: process.env.CLOUDINARY_API_SECRET
+    // api_key:'242425789528719',
+    // api_secret:'QXKf2dlz74zNGB-4YCF4NjePE-A'
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 
